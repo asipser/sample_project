@@ -3,6 +3,8 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/js/ajax.js"></script>
   </head>
   <body>
     <h1><%= title %> Form</h1>
@@ -28,6 +30,14 @@
         <li><button type="submit">Submit</button></li>
       </ul>
     </form>
+
+    <ul>
+      <li>User to Find</li>
+      <li><input type="text" placeholder="Username" class="find"></li>
+      <li><button type="submit" class="find-submit">Submit</button></li>
+      <li><p class="find-output"></p></li>
+    </ul>
+    
     <a href="/userlist">See userlist</a>
   </body>
 </html>

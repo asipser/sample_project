@@ -63,4 +63,14 @@ router.post('/deleteuser', function (req, res, next) {
 	}
 });
 
+router.get('/findfruit', function (req, res, next) {
+	var name = req.query.username;
+	if (db[name]) {
+		res.send(db[name]);
+	}
+	else {
+		res.send("Error! Username not found");
+	}
+});
+
 module.exports = router;
