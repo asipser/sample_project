@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 
 /* GET userlist JSON */
 router.get('/userlist', function (req, res, next) {
-  // TODO: query database db.users.find(...) and return the result
+  // TODO: query database db.people.find(...) and return the result
   // res.send({...});
   res.send('Nothing :(');
 });
@@ -28,10 +28,10 @@ router.post('/adduser', function (req, res, next) {
 
   // Adding the new entry to the db
   // TODO: insert the new document into collection
-  //   db.users.insert({ ... });
+  //   db.people.insert({ ... });
   //      ... or ...
   // update the existing one!
-  //   db.users.update({ _id: ... }, { $set: {...} })
+  //   db.people.update({ _id: ... }, { $set: {...} })
   // How would you do this?
 
   // Redirecting back to the root
@@ -46,8 +46,8 @@ router.post('/deleteuser', function (req, res, next) {
   var userName = req.body.username;
 
   // Checking whether user is in db
-  // TODO: check if the user is in db with db.users.find(...),
-  // TODO: and then remove it if it exists db.users.remove(...)
+  // TODO: check if the user is in db with db.people.find(...),
+  // TODO: and then remove it if it exists db.people.remove(...)
   // TODO: or return an error
   res.send('Nothing :(');
 });
