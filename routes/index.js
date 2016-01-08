@@ -16,7 +16,13 @@ router.get('/', function (req, res, next) {
 router.get('/userlist', function (req, res, next) {
   // TODO: query database db.people.find(...) and return the result
   // res.send({...});
-  res.send('Nothing :(');
+  db.people.find({}).toArray(function (err, peeps) {
+    var jsonReturn = {};
+    peeps.forEach(function (person) {
+      jsonReturn[person._id] = person.fruit;
+    });
+    res.send(jsonReturn);
+  });
 });
 
 /* POST to adduser */
@@ -34,8 +40,20 @@ router.post('/adduser', function (req, res, next) {
   //   db.people.update({ _id: ... }, { $set: {...} })
   // How would you do this?
 
-  // Redirecting back to the root
-  res.redirect('/');
+  db.people.find({_id: userName}).toArray(function (err, peeps) {
+    if (peeps.length > 0) {
+      // the user needs to be updated
+      db.people.update({_id: userName}, {$set: {fruit: userFruit}}, function (err) {
+        // Redirecting back to the root
+        res.redirect('/');
+      });
+    } else {
+      db.people.insert({_id: userName, fruit: userFruit}, function (err) {
+        // Redirecting back to the root
+        res.redirect('/');
+      });
+    }
+  });
 
 });
 
@@ -49,22 +67,29 @@ router.post('/deleteuser', function (req, res, next) {
   // TODO: check if the user is in db with db.people.find(...),
   // TODO: and then remove it if it exists db.people.remove(...)
   // TODO: or return an error
-  res.send('Nothing :(');
+  db.people.find({_id: userName}, function (err, peeps) {
+    if (peeps.length > 0) {
+      db.people.remove({_id: userName}, function (err) {
+        res.redirect('/');
+      });
+    } else {
+      var errMsg = {message: 'User not found'};
+      res.render('error', errMsg);
+    }
+  });
 });
 
 router.get('/findfruit', function (req, res, next) {
-  var name = req.query.username;
+  var userName = req.query.username;
 
-  // TODO: check if user exists. If user exists, send back their fruit.
-  
-  var userExists = false;
-  if (userExists) {
-    res.send('Nothing :(');
-    //res.send({});
-  }
-  else {
-    res.send("Error! Username not found");
-  }
+  db.people.find({_id: userName}, function (err, peeps) {
+    if (peeps.length > 0) {
+      res.end(peeps[0].fruit);
+    } else {
+      var errMsg = {message: 'User not found'};
+      res.render('error', errMsg);
+    }
+  });
 });
 
 module.exports = router;
