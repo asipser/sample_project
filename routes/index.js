@@ -67,7 +67,7 @@ router.post('/deleteuser', function (req, res, next) {
   // TODO: check if the user is in db with db.people.find(...),
   // TODO: and then remove it if it exists db.people.remove(...)
   // TODO: or return an error
-  db.people.find({_id: userName}, function (err, peeps) {
+  db.people.find({_id: userName}).toArray(function (err, peeps) {
     if (peeps.length > 0) {
       db.people.remove({_id: userName}, function (err) {
         res.redirect('/');
