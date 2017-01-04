@@ -81,8 +81,8 @@ router.post('/deleteuser', function (req, res, next) {
 
 router.get('/findfruit', function (req, res, next) {
   var userName = req.query.username;
-
-  db.people.find({_id: userName}, function (err, peeps) {
+  //console.log(userName);
+  db.people.find({_id: userName}).toArray(function (err, peeps) {
     if (peeps.length > 0) {
       res.end(peeps[0].fruit);
     } else {
