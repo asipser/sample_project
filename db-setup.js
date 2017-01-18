@@ -1,6 +1,6 @@
 var mongo = require('mongodb').MongoClient;
 
-var dbConnectionUrl = 'mongodb://localhost:27017/test';
+var dbConnectionUrl = 'mongodb://aaronsmongodbrw:xSJEozk4Tmg74Q1iyXMN0sEgr0PfegnIrDz5xq8N5UvmwlsFSSqGR0QMAx1nw5hdiENdcSQbHHK7t4ZQY0wf6g==@aaronsmongodbrw.documents.azure.com:10250/test?ssl=true';
 
 var collections = {};
 
@@ -11,7 +11,7 @@ mongo.connect(dbConnectionUrl, function (err, db) {
     return;
   }
 
-  collections.people = db.collection('people');
+  collections.people = db.collection('users');
 });
 
 
